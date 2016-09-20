@@ -1,0 +1,4 @@
+{% func Home(title string) %}
+  <h1>{%s title %}</h1>
+  <p>The plan is to demo various full stack techniques here</p>
+{% endfunc %}
