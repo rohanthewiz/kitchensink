@@ -27,32 +27,35 @@ func StreamHome(qw422016 *qt422016.Writer, title string) {
 	//line mainpage.qtpl:2
 	qw422016.N().S(`</h1>
   <p>The plan is to demo various full stack techniques here</p>
+  <hr />
+  <div id="app"></div>
+  <script type="text/javascript" src="/dist/js/bundle.js"></script>
 `)
-//line mainpage.qtpl:4
+//line mainpage.qtpl:7
 }
 
-//line mainpage.qtpl:4
+//line mainpage.qtpl:7
 func WriteHome(qq422016 qtio422016.Writer, title string) {
-	//line mainpage.qtpl:4
+	//line mainpage.qtpl:7
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line mainpage.qtpl:4
+	//line mainpage.qtpl:7
 	StreamHome(qw422016, title)
-	//line mainpage.qtpl:4
+	//line mainpage.qtpl:7
 	qt422016.ReleaseWriter(qw422016)
-//line mainpage.qtpl:4
+//line mainpage.qtpl:7
 }
 
-//line mainpage.qtpl:4
+//line mainpage.qtpl:7
 func Home(title string) string {
-	//line mainpage.qtpl:4
+	//line mainpage.qtpl:7
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line mainpage.qtpl:4
+	//line mainpage.qtpl:7
 	WriteHome(qb422016, title)
-	//line mainpage.qtpl:4
+	//line mainpage.qtpl:7
 	qs422016 := string(qb422016.B)
-	//line mainpage.qtpl:4
+	//line mainpage.qtpl:7
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line mainpage.qtpl:4
+	//line mainpage.qtpl:7
 	return qs422016
-//line mainpage.qtpl:4
+//line mainpage.qtpl:7
 }
