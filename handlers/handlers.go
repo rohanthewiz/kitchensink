@@ -34,7 +34,7 @@ func StaticHandler(ctx *fasthttp.RequestCtx) {
 		file, err := ioutil.ReadFile(file_path)
 		if err != nil {
 			ctx.SetStatusCode(500)
-			log.Println("Error reading file")
+			log.Println("Error reading file", file_path)
 			return
 		}
 		ctx.Write(file)
