@@ -27,6 +27,8 @@ class App extends React.Component {
     return (
       <div id="app">
         <h2>A Simple and easily customizable selector for React</h2>
+        <strong>(data is supplied statically from the backend
+          so no filtering available yet &ndash; coming soon!)</strong>
         <Selector
           loadOptions={doFetch}
           minimumInput={2}
