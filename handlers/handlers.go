@@ -17,6 +17,7 @@ func MainPageHandler(ctx *fasthttp.RequestCtx) {
 
 func ProductsHandler(ctx *fasthttp.RequestCtx) {
 	ctx.SetContentType("text/json; charset=utf-8")
+	log.Println("QueryArgs", ctx.QueryArgs())
 	str, err := json.Marshal(models.Products)
 	if err != nil {
 		ctx.SetStatusCode(500)

@@ -1,8 +1,8 @@
 package models
 
 type Product struct {
-	Label string
-	Value string
+	Label string `json:"label"`
+	Value string `json:"value"`
 }
 
 var Products = []Product{
