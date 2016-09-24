@@ -5,7 +5,7 @@ import (
 )
 
 func TestAll(t *testing.T) {
-	InitDB()
+	product_db = NewDB("products_test.db")
 	defer CloseDB()
 	if product_db == nil {
 		t.Error()
