@@ -10,6 +10,7 @@ import (
 var routes = map[string]func(ctx *fasthttp.RequestCtx) {
 	"/": handlers.MainPageHandler,
 	"/products": handlers.ProductsHandler,
+	"/products-seed": handlers.ProductsSeedHandler,
 }
 
 func Route(ctx *fasthttp.RequestCtx) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Selector from './selector/selector.jsx';
 
-const QueryLimit = 4; // This must correspond to the limit set on the backend
+const QueryLimit = 6; // This must correspond to the limit set on the backend
 
 class App extends React.Component {
   constructor(args) {
@@ -19,7 +19,7 @@ class App extends React.Component {
           return response.json();
         }).then((data) => {
           let ret = {options: data};
-          if(data.length < QueryLimit) ret['complete'] = true;
+          if(data.length > 0 && data.length < QueryLimit) ret['complete'] = true;
           return ret;
         });
     };

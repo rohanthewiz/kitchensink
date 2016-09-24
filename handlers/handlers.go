@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"github.com/valyala/fasthttp"
-	"github.com/rohanthewiz/kitchensink/models"
+	"github.com/rohanthewiz/kitchensink/models/product"
 	"github.com/rohanthewiz/kitchensink/templates"
 	"encoding/json"
 	"strings"
@@ -17,13 +17,31 @@ func MainPageHandler(ctx *fasthttp.RequestCtx) {
 
 func ProductsHandler(ctx *fasthttp.RequestCtx) {
 	ctx.SetContentType("text/json; charset=utf-8")
-	log.Println("QueryArgs", ctx.QueryArgs())
-	str, err := json.Marshal(models.Products)
+	//qargs := ctx.QueryArgs().QueryString()
+	//log.Printf("QueryArgs - querystring: %v\n", string(qargs))
+	res, err := product.QueryProducts("")
+	if err != nil {
+		ctx.SetStatusCode(500)
+	}
+	str, err := json.Marshal(res)
+	log.Printf("products: %v\n", string(str))
 	if err != nil {
 		ctx.SetStatusCode(500)
 	} else {
 		ctx.WriteString(string(str))
 	}
+}
+
+func ProductsSeedHandler(ctx *fasthttp.RequestCtx) {
+	err := product.SeedDB()
+	var code int
+	if err != nil {
+		code = 500
+	} else {
+		code = 200
+	}
+	log.Println(code)
+	ctx.Redirect("/", code) // does code to anything here?
 }
 
 // Poor man's static handler :-)
