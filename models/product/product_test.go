@@ -2,10 +2,16 @@ package product
 
 import (
 	"testing"
+	"sync"
 )
 
+var mutex = &sync.Mutex{}
+
+
 func TestAll(t *testing.T) {
+	mutex.Lock()
 	product_db = NewDB("products_test.db")
+	mutex.Unlock()
 	defer CloseDB()
 	if product_db == nil {
 		t.Error()

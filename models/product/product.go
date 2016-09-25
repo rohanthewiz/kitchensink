@@ -1,5 +1,7 @@
 package product
 
+import "sync"
+
 type Product struct {
 	Id uint64 `json:"id"`
 	Label string `json:"label"`
@@ -16,8 +18,12 @@ var	products_seed = []Product{
 	{6, "Fruit n Spice", "fruit_n_spice_6"},
 }
 
+var mutex = &sync.Mutex{}
+
 func InitDB() {
+	mutex.Lock()
 	product_db = NewDB("products.db")
+	mutex.Unlock()
 }
 
 func CloseDB() {
@@ -33,8 +39,10 @@ func QueryProducts(pattern string) ([]Product, error) {
 
 func SeedDB() error {
 	if product_db == nil { InitDB()	}
+	mutex.Lock()
 	product_db.DropTable()
 	product_db.CreateTable()
 	err := product_db.StoreProducts(products_seed)
+	mutex.Unlock()
 	return err
 }
