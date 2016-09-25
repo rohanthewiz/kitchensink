@@ -5,6 +5,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"errors"
+	"strings"
 )
 
 var product_db *DB // DB singleton
@@ -76,14 +77,25 @@ func (d DB) StoreProducts(products []Product) error {
 	return nil
 }
 
-func (d DB) QueryProducts(patt string) ([]Product, error) { // todo use patt
+func (d DB) QueryProducts(tokens []string) ([]Product, error) {
 	products := []Product{}
 	if d.db == nil {
 		return products, errors.New("Database is not initialized")
 	}
-	query := `
-	SELECT Id, Label, Value FROM products
-	ORDER BY Label DESC`
+	query := "SELECT Id, Label, Value FROM products"
+	if len(tokens) > 0 {
+		where_clause := " WHERE "
+		clauses := []string{}
+		for _, token := range tokens {
+			clauses = append(clauses, "Label LIKE '%" + token + "%'")
+		}
+		where_clause += strings.Join(clauses, " AND ")
+		query += where_clause
+	}
+
+	query += " ORDER BY Label DESC"
+	log.Println(query)
+
 	rows, err := d.db.Query(query)
 	if err != nil {
 		log.Println("Err in db query:", err)

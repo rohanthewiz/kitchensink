@@ -8,6 +8,8 @@ import (
 	"strings"
 	"io/ioutil"
 	"log"
+	"net/url"
+	"fmt"
 )
 
 func MainPageHandler(ctx *fasthttp.RequestCtx) {
@@ -17,11 +19,20 @@ func MainPageHandler(ctx *fasthttp.RequestCtx) {
 
 func ProductsHandler(ctx *fasthttp.RequestCtx) {
 	ctx.SetContentType("text/json; charset=utf-8")
-	//qargs := ctx.QueryArgs().QueryString()
-	//log.Printf("QueryArgs - querystring: %v\n", string(qargs))
-	res, err := product.QueryProducts("")
+	qargs := ctx.QueryArgs().QueryString()
+	log.Printf("QueryArgs - querystring: %v\n", string(qargs))
+	values, err := url.ParseQuery(string(qargs))
 	if err != nil {
-		ctx.SetStatusCode(500)
+		fmt.Println("Err", err)
+		ctx.SetStatusCode(fasthttp.StatusBadRequest); return
+	}
+	pattern, ok := values["q"] // pattern is an array of strings
+	if !ok {
+		ctx.SetStatusCode(fasthttp.StatusBadRequest); return
+	}
+	res, err := product.QueryProducts(pattern)
+	if err != nil {
+		ctx.SetStatusCode(500); return
 	}
 	str, err := json.Marshal(res)
 	log.Printf("products: %v\n", string(str))

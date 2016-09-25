@@ -25,7 +25,7 @@ func TestAll(t *testing.T) {
 		{3, "Samantha", "samantha_3"},
 	}
 	product_db.StoreProducts(products)
-	t.Log(product_db.QueryProducts(""))
+	t.Log(product_db.QueryProducts([]string{}))
 
 	more_products := []Product{
 		{4, "Big Joe", "big_joe_4"},
@@ -33,5 +33,5 @@ func TestAll(t *testing.T) {
 		{6, "Fruit n Spice", "fruit_n_spice_6"},
 	}
 	product_db.StoreProducts(more_products)
-	t.Log(product_db.QueryProducts(""))
+	t.Log(product_db.QueryProducts([]string{}))
 }

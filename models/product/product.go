@@ -1,6 +1,9 @@
 package product
 
-import "sync"
+import (
+	"sync"
+	"log"
+)
 
 type Product struct {
 	Id uint64 `json:"id"`
@@ -30,10 +33,11 @@ func CloseDB() {
 	product_db.Close()
 }
 
-func QueryProducts(pattern string) ([]Product, error) {
+func QueryProducts(pattern []string) ([]Product, error) {
 	if product_db == nil { InitDB()	}
 	// unescape URL
 	// clean up, escape, build regex
+	log.Println("Query string:", pattern)
 	return product_db.QueryProducts(pattern)
 }
 
