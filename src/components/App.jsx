@@ -26,12 +26,11 @@ class App extends React.Component {
 
     return (
       <div id="app">
-        <h2>A Simple and easily customizable selector for React</h2>
+        <h2>A Simple and easily customized selector for React</h2>
         <strong>(data is supplied from SQLite on the backend)</strong><br/>
-        <strong>Techs in use: Go, FastHttp, Quicktemplate, React, Node, etc</strong>
         <Selector
           loadOptions={doFetch}
-          minimumInput={2}
+          minimumInput={1}
           placeholder="Search products"
           value={this.state.selectValue}
           selectionChanged={this.saveSelectedAsset.bind(this)}

@@ -1,0 +1,33 @@
+{% interface
+  Page {
+    Title()
+    Menu()
+    Body()
+    Footer()
+  }
+%}
+
+{% func PageTemplate(p Page) %}
+ <html>
+    <head>
+      <title>{%= p.Title() %}</title>
+      <link rel="stylesheet" type="text/css" href="/dist/css/app.css">
+    </head>
+    <body>
+      <div id="top_menu">{%= p.Menu() %}</div>
+      <div id="main_content">{%= p.Body() %}</div>
+      <div id="app"></div>
+      <div id="footer">{%= p.Footer() %}</div>
+      <script type="text/javascript" src="/dist/js/bundle.js"></script>
+    </body>
+ </html>
+{% endfunc %}
+
+{% code
+  type BasePage struct{}
+%}
+
+{% func (p *BasePage) Title() %}This is a base title{% endfunc %}
+{% func (p *BasePage) Menu() %}<p><a href="/">return to main page</a></p>{% endfunc %}
+{% func (p *BasePage) Body() %}This is a base body{% endfunc %}
+{% func (p *BasePage) Footer() %}&copy; 2016 - Acme Co.{% endfunc %}

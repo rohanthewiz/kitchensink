@@ -14,7 +14,10 @@ import (
 
 func MainPageHandler(ctx *fasthttp.RequestCtx) {
 	ctx.SetContentType("text/html; charset=utf-8")
-	templates.WriteHome(ctx, "A Presentation of some technologies")
+	p := &templates.MainPage{
+		//CTX: ctx, // or any other param we are setup to pass
+	}
+	templates.WritePageTemplate(ctx, p)
 }
 
 func ProductsHandler(ctx *fasthttp.RequestCtx) {

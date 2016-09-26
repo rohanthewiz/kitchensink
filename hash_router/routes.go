@@ -20,7 +20,7 @@ func Route(ctx *fasthttp.RequestCtx) {
 	if len(arr) > 2 && (arr[1] == "assets" || arr[1] == "dist") { // Static
 		handlers.StaticHandler(ctx)
 	} else {
-		handler, ok := routes[path]
+		handler, ok := routes[path] // pull the route out of a hash :-)
 		if ok {
 			handler(ctx)
 		} else {

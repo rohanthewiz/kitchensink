@@ -1,5 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import _ from 'lodash';
+import Chosen from './chosen.jsx';
 import Dropdown from './dropdown.jsx';
 
 // props
@@ -14,25 +16,6 @@ import Dropdown from './dropdown.jsx';
 // Caching
 // If pattern starts with a cached pattern then use cached results
 
-class Chosen extends React.Component {
-  constructor(args) {
-    super(args);
-  }
-  render() {
-    const _onClick = () => {
-      this.props.onChosenClicked('Yo');
-    };
-    return (
-      <div onClick={_onClick}
-        className={this.props.visible ? "asset-selector__label--visible" : "asset-selector__label--hidden"}
-           style={{padding: '10px'}}
-      >
-        <span>{this.props.value}</span>
-      </div>
-    )
-  }
-}
-
 class Selector extends React.Component {
   constructor(args) {
     super(args);
@@ -41,7 +24,7 @@ class Selector extends React.Component {
       dropdown_visible: false,
       searching: false,
       cache: {}, // {'john br': [result, ...]}
-      value: "",
+      value: 'Nothing Chosen',
       debounce: {timer: null, period: 300, // qe -- queue_empty, ctp -- clear_to_pass
         results: null, input: null}
     };
@@ -59,31 +42,38 @@ class Selector extends React.Component {
     // Callback for label clicked
     const hideChosen = (arg) => {
       console.log("Clicking label...event:"); console.log(arg);
+      //this.refs.selector_input.focus();
       this.setState({inputVisible: true});
+      setTimeout(function() { // React state updates are not immediate so go asynch to buy time
+        document.querySelector(".selector__input").focus();
+        //no workie: ReactDOM.findDOMNode(this.refs.selector_input).focus();
+      }, 0);
+
       return false;
     };
 
     return (
-      <div className="asset-selector ">
-        <input type="text"
+      <div className="selector">
+        <input type="text" autoFocus
                className={this.state.inputVisible ?
-                 "asset-selector__input--visible" : "asset-selector__input--hidden"}
+                 "selector__input selector__input--visible" :
+                 "selector__input selector__input--hidden"}
                title={this.props.title}
                placeholder={this.props.placeholder}
                onChange={this.inputChanged.bind(this)}
                onKeyDown={this.inputKeyDown.bind(this)}
-               ref="asset_selector_input"
+               ref="selector_input"
         />
         <Chosen value={this.state.value}
                visible={!this.state.inputVisible}
                onChosenClicked={hideChosen}
         />
-        <Dropdown className="asset-selector__dropdown"
+        <Dropdown className="selector__dropdown"
            items={this.state.items}
            searching={this.state.searching}
            visible={this.state.dropdown_visible}
            setSelected={setSelected}
-           ref="asset_selector_dropdown"
+           ref="selector_dropdown"
         />
       </div>
     )
@@ -92,7 +82,7 @@ class Selector extends React.Component {
   // EVENT HANDLERS
 
   inputKeyDown(evt) {
-    let dropdown = this.refs.asset_selector_dropdown;
+    let dropdown = this.refs.selector_dropdown;
     if (evt.keyCode == 13) { // Enter
       if (this.state.items.length < 1) return false;
       let selIdx = dropdown.selectedIndex();
@@ -128,15 +118,14 @@ class Selector extends React.Component {
     // Filter the list or Make Async call
     let key = this.cached(val);
     if(key) {
-      console.log("cache_key is: " + key + ", cached items count: " + this.state.cache[key].length);
-      this.setState({items: this.state.cache[key]});
-      this.filterItems(val);
+      console.log("cache_key is: " + key + ", cached items: " + this.state.cache[key].length);
+      this.filterItems(val, key);
       this.setDropdownVisible(true);
     } else {
       setTimeout(() => {
         this.setState({searching: true});
         this.props.loadOptions(val).then((res) => {
-          console.log(res);
+          console.log("Async results:"); console.log(res);
           if(res.options) {
             this.setState({items: res.options, searching: false});
             this.setDropdownVisible(true); // to do: visible based on items length or "no result"
@@ -174,15 +163,16 @@ class Selector extends React.Component {
     if(!show && this.state.dropdown_visible) this.setState({dropdown_visible: false});
   }
 
-  filterItems(pattern) {
+  // Local filtering of Items
+  filterItems(pattern, key) {
     var regstr = _.filter(_.escapeRegExp(pattern).split(' '), (token) => {
       return token.length >= 1;
     }).join('.*\\s');
     let rgx = new RegExp(regstr, "i");
     console.log("regstr: " + regstr);
-    let filtered = _.filter(this.state.items, (item) => {
-      if(item.label.search(rgx) >= 0) return true;
-      return false;
+
+    let filtered = _.filter(this.state.cache[key], (item) => {
+      return item.label.search(rgx) >= 0;
     });
     this.setState({items: filtered});
   }

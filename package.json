@@ -4,9 +4,10 @@
   "description": "Demonstration of React with a few controls, running on a Go backend",
   "main": "index.js",
   "scripts": {
-    "build": "npm run compile",
-    "compile": "browserify src/index.jsx -t babelify -o dist/js/bundle.js",
-    "watch": "onchange 'src/**/*.jsx' -- npm run build"
+    "build": "npm run compile-js; npm run compile-css",
+    "compile-js": "browserify src/index.jsx -t babelify -o dist/js/bundle.js",
+    "compile-css": "stylus src/styl/master.styl -o dist/css/app.css",
+    "watch": "onchange 'src/**/*' -- npm run build"
   },
   "babel": {
     "presets": [
@@ -19,7 +20,8 @@
   "dependencies": {
     "lodash": "^4.15.0",
     "react": "^15.3.1",
-    "react-dom": "^15.3.1"
+    "react-dom": "^15.3.1",
+    "stylus": "^0.54.5"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
@@ -28,6 +30,7 @@
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
     "http-server": "^0.9.0",
-    "onchange": "^3.0.2"
+    "onchange": "^3.0.2",
+    "stylus": "^0.54.5"
   }
 }

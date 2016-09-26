@@ -1,0 +1,53 @@
+// Product Selector
+@require _globals
+
+product-selector()
+  selector-max-width = 360px
+  dark-gray = #282828
+
+  .selector
+    font-family: amble-regular
+    max-width: selector-max-width + 4px
+    &__input
+      max-width: selector-max-width
+      color: dark-gray
+      font-size: 12px
+      &--visible
+        display: inline-block
+      &--hidden
+        display: none
+
+    &__label
+      &--visible
+        display: inline-block
+        font-family: amble-regular
+        color: whitesmoke
+        font-size: 12px;
+        border: 1px solid #b8b8b8
+        border-radius: 4px
+        background-color: black
+        cursor: pointer
+      &--hidden
+        display: none
+
+    &__dropdown
+      max-width: selector-max-width
+      list-style: none
+      color: black
+      border: 1px solid #c4c4c4
+      margin-left: 0
+      padding-left: 0
+      > li
+        max-width: selector-max-width - 2px
+        padding: 1px 4px
+      .dropdown__tally
+        font-size: 10px
+        color: ghostwhite
+        background-color: dark-gray
+      .dropdown__li
+        font-size: 11px
+        margin-left: 1px
+        background-color: mintcream
+        &--selected
+          color: white
+          background-color: #00a7f3

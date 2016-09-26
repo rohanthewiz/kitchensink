@@ -11,51 +11,57 @@ import (
 	qt422016 "github.com/valyala/quicktemplate"
 )
 
-//line mainpage.qtpl:1
+// Main page template implements BasePage methods
+
+//line mainpage.qtpl:2
 var (
 	_ = qtio422016.Copy
 	_ = qt422016.AcquireByteBuffer
 )
 
-//line mainpage.qtpl:1
-func StreamHome(qw422016 *qt422016.Writer, title string) {
-	//line mainpage.qtpl:1
+//line mainpage.qtpl:3
+type MainPage struct {
+	BasePage // Inherit so we can use BasePage functions for layout
+	// CTX *fasthttp.RequestCtx // or any other attribute we want to pass
+}
+
+// Override any BasePage function we want to change
+//
+
+//line mainpage.qtpl:11
+func (p *MainPage) StreamBody(qw422016 *qt422016.Writer) {
+	//line mainpage.qtpl:11
 	qw422016.N().S(`
-  <h1>`)
-	//line mainpage.qtpl:2
-	qw422016.E().S(title)
-	//line mainpage.qtpl:2
-	qw422016.N().S(`</h1>
-  <p>The plan is to demo various full stack techniques here</p>
+  <h1>A Demonstration of a Full Stack App</h1>
+  <p><strong>Techs in use: Go, FastHttp, Quicktemplate, React, Node, etc</strong>
+  </p>
   <hr />
-  <div id="app"></div>
-  <script type="text/javascript" src="/dist/js/bundle.js"></script>
 `)
-//line mainpage.qtpl:7
+//line mainpage.qtpl:16
 }
 
-//line mainpage.qtpl:7
-func WriteHome(qq422016 qtio422016.Writer, title string) {
-	//line mainpage.qtpl:7
+//line mainpage.qtpl:16
+func (p *MainPage) WriteBody(qq422016 qtio422016.Writer) {
+	//line mainpage.qtpl:16
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line mainpage.qtpl:7
-	StreamHome(qw422016, title)
-	//line mainpage.qtpl:7
+	//line mainpage.qtpl:16
+	p.StreamBody(qw422016)
+	//line mainpage.qtpl:16
 	qt422016.ReleaseWriter(qw422016)
-//line mainpage.qtpl:7
+//line mainpage.qtpl:16
 }
 
-//line mainpage.qtpl:7
-func Home(title string) string {
-	//line mainpage.qtpl:7
+//line mainpage.qtpl:16
+func (p *MainPage) Body() string {
+	//line mainpage.qtpl:16
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line mainpage.qtpl:7
-	WriteHome(qb422016, title)
-	//line mainpage.qtpl:7
+	//line mainpage.qtpl:16
+	p.WriteBody(qb422016)
+	//line mainpage.qtpl:16
 	qs422016 := string(qb422016.B)
-	//line mainpage.qtpl:7
+	//line mainpage.qtpl:16
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line mainpage.qtpl:7
+	//line mainpage.qtpl:16
 	return qs422016
-//line mainpage.qtpl:7
+//line mainpage.qtpl:16
 }

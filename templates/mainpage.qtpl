@@ -1,7 +1,16 @@
-{% func Home(title string) %}
-  <h1>{%s title %}</h1>
-  <p>The plan is to demo various full stack techniques here</p>
+// Main page template implements BasePage methods
+{% code
+type MainPage struct {
+  BasePage // Inherit so we can use BasePage functions for layout
+  // CTX *fasthttp.RequestCtx // or any other attribute we want to pass
+}
+%}
+
+// Override any BasePage function we want to change
+
+{% func (p *MainPage) Body() %}
+  <h1>A Demonstration of a Full Stack App</h1>
+  <p><strong>Techs in use: Go, FastHttp, Quicktemplate, React, Node, etc</strong>
+  </p>
   <hr />
-  <div id="app"></div>
-  <script type="text/javascript" src="/dist/js/bundle.js"></script>
 {% endfunc %}

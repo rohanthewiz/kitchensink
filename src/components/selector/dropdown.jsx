@@ -16,7 +16,7 @@ class Dropdown extends React.Component {
   render() {
     if (!this.props.visible) return null;
     return (
-      <ul className="asset-selector__dropdown">
+      <ul className="selector__dropdown">
         <li className="dropdown__tally">{this.tally()}</li>
         {this.items()}
       </ul>

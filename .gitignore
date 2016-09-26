@@ -5,6 +5,7 @@ npm-debug.log
 
 dist/*
 !dist/.keep
+!dist/fonts/
 
 *_test.db
 
