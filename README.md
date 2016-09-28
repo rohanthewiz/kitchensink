@@ -1,5 +1,5 @@
 # A Full stack app demonstration - React frontend, Go backend
-(This is a somewhat functional work in-progress)
+This is a work in-progress, but demonstrable here: http://gonotes.net:8094
 
 ### Technologies Employed
 
@@ -10,6 +10,7 @@ On the backend
 
 On the frontend
 - React
+- Stylus CSS preprocessing
 - Node for asset compilation
 
 ### Setup and Compilation of React components
