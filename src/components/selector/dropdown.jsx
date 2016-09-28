@@ -26,8 +26,8 @@ class Dropdown extends React.Component {
   tally() {
     if(this.props.searching) {
       return <span>Searching...</span>
-    } else if(this.state.count >= 12) {
-      return <span>12 items or more found</span>
+    } else if(this.state.count >= 8) {
+      return <span>max of 8 items returned</span>
     } else {
       return <span>{this.state.count} item{this.state.count != 1 ? 's' : ''} found</span>
     }

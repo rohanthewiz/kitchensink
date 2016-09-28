@@ -2,10 +2,11 @@
 @require _globals
 
 product-selector()
-  selector-max-width = 360px
+  selector-max-width = 340px
   dark-gray = #282828
 
   .selector
+    margin-top: 0.3em
     font-family: amble-regular
     max-width: selector-max-width + 4px
     &__input
@@ -25,7 +26,7 @@ product-selector()
         font-size: 12px;
         border: 1px solid #b8b8b8
         border-radius: 4px
-        background-color: black
+        background-color: #C05F18
         cursor: pointer
       &--hidden
         display: none
@@ -35,17 +36,19 @@ product-selector()
       list-style: none
       color: black
       border: 1px solid #c4c4c4
+      margin-top: 0
       margin-left: 0
       padding-left: 0
       > li
         max-width: selector-max-width - 2px
+        text-overflow: ellipsis
         padding: 1px 4px
       .dropdown__tally
-        font-size: 10px
+        font-size: 12px
         color: ghostwhite
         background-color: dark-gray
       .dropdown__li
-        font-size: 11px
+        font-size: 12px
         margin-left: 1px
         background-color: mintcream
         &--selected

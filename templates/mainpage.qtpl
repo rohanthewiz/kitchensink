@@ -10,7 +10,13 @@ type MainPage struct {
 
 {% func (p *MainPage) Body() %}
   <h1>A Demonstration of a Full Stack App</h1>
-  <p><strong>Techs in use: Go, FastHttp, Quicktemplate, React, Node, etc</strong>
-  </p>
+  <strong>Techs in use:</strong>
+  <ul>
+    <li><strong>Go</strong> - The backend is written in Go (golang)</li>
+    <li><strong>FastHttp</strong> - The router used is the fastest available for Go (https://github.com/valyala/fasthttp)</li>
+    <li><strong>Quicktemplate</strong> - Templates are compiled right into the executable (very fast!) (https://github.com/valyala/quicktemplate)</li>
+    <li><strong>Reactjs</strong> - The front end is written in cutting edge Reactjs</li>
+    <li><strong>Custom select control</strong> - The select control is written from scratch and operates asynchronously with caching</li>
+  </ul>
   <hr />
 {% endfunc %}

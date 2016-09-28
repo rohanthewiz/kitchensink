@@ -33,35 +33,41 @@ func (p *MainPage) StreamBody(qw422016 *qt422016.Writer) {
 	//line mainpage.qtpl:11
 	qw422016.N().S(`
   <h1>A Demonstration of a Full Stack App</h1>
-  <p><strong>Techs in use: Go, FastHttp, Quicktemplate, React, Node, etc</strong>
-  </p>
+  <strong>Techs in use:</strong>
+  <ul>
+    <li><strong>Go</strong> - The backend is written in Go (golang)</li>
+    <li><strong>FastHttp</strong> - The router used is the fastest available for Go (https://github.com/valyala/fasthttp)</li>
+    <li><strong>Quicktemplate</strong> - Templates are compiled right into the executable (very fast!) (https://github.com/valyala/quicktemplate)</li>
+    <li><strong>Reactjs</strong> - The front end is written in cutting edge Reactjs</li>
+    <li><strong>Custom select control</strong> - The select control is written from scratch and operates asynchronously with caching</li>
+  </ul>
   <hr />
 `)
-//line mainpage.qtpl:16
+//line mainpage.qtpl:22
 }
 
-//line mainpage.qtpl:16
+//line mainpage.qtpl:22
 func (p *MainPage) WriteBody(qq422016 qtio422016.Writer) {
-	//line mainpage.qtpl:16
+	//line mainpage.qtpl:22
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line mainpage.qtpl:16
+	//line mainpage.qtpl:22
 	p.StreamBody(qw422016)
-	//line mainpage.qtpl:16
+	//line mainpage.qtpl:22
 	qt422016.ReleaseWriter(qw422016)
-//line mainpage.qtpl:16
+//line mainpage.qtpl:22
 }
 
-//line mainpage.qtpl:16
+//line mainpage.qtpl:22
 func (p *MainPage) Body() string {
-	//line mainpage.qtpl:16
+	//line mainpage.qtpl:22
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line mainpage.qtpl:16
+	//line mainpage.qtpl:22
 	p.WriteBody(qb422016)
-	//line mainpage.qtpl:16
+	//line mainpage.qtpl:22
 	qs422016 := string(qb422016.B)
-	//line mainpage.qtpl:16
+	//line mainpage.qtpl:22
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line mainpage.qtpl:16
+	//line mainpage.qtpl:22
 	return qs422016
-//line mainpage.qtpl:16
+//line mainpage.qtpl:22
 }

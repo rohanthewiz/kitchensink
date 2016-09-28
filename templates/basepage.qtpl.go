@@ -147,7 +147,7 @@ func (p *BasePage) Title() string {
 //line basepage.qtpl:31
 func (p *BasePage) StreamMenu(qw422016 *qt422016.Writer) {
 	//line basepage.qtpl:31
-	qw422016.N().S(`<p><a href="/">return to main page</a></p>`)
+	qw422016.N().S(`<span><a href="/">Home</a></span>`)
 //line basepage.qtpl:31
 }
 

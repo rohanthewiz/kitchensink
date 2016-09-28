@@ -6,9 +6,11 @@ import (
 	"log"
 	"errors"
 	"strings"
+	"fmt"
 )
 
 var product_db *DB // DB singleton
+const query_limit = 8 // For limit, but also cache activation // Must match limit set in Selector
 
 // PRODUCT DB
 
@@ -94,6 +96,7 @@ func (d DB) QueryProducts(tokens []string) ([]Product, error) {
 	}
 
 	query += " ORDER BY Label DESC"
+	query += fmt.Sprintf(" LIMIT %d", query_limit)
 	log.Println(query)
 
 	rows, err := d.db.Query(query)

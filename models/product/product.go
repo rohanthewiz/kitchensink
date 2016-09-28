@@ -11,16 +11,6 @@ type Product struct {
 	Value string `json:"value"`
 }
 
-// Yep still visible within this package
-var	products_seed = []Product{
-	{1, "John Brown", "john_brown_1"},
-	{2, "Mary Sue", "mary_sue_2"},
-	{3, "Samantha", "samantha_3"},
-	{4, "Big Joe", "big_joe_4"},
-	{5, "Banana Head", "banana_head_5"},
-	{6, "Fruit n Spice", "fruit_n_spice_6"},
-}
-
 var mutex = &sync.Mutex{}
 
 func InitDB() {

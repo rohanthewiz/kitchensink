@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import Chosen from './chosen.jsx';
 import Dropdown from './dropdown.jsx';
@@ -25,7 +24,7 @@ class Selector extends React.Component {
       searching: false,
       cache: {}, // {'john br': [result, ...]}
       value: 'Nothing Chosen',
-      debounce: {timer: null, period: 300, // qe -- queue_empty, ctp -- clear_to_pass
+      debounce: {timer: null, period: 300, // Debounce is not implemented yet qe -- queue_empty, ctp -- clear_to_pass
         results: null, input: null}
     };
   }
@@ -41,11 +40,11 @@ class Selector extends React.Component {
     };
     // Callback for label clicked
     const hideChosen = (arg) => {
-      console.log("Clicking label...event:"); console.log(arg);
-      //this.refs.selector_input.focus();
       this.setState({inputVisible: true});
       setTimeout(function() { // React state updates are not immediate so go asynch to buy time
-        document.querySelector(".selector__input").focus();
+        let inp = document.querySelector(".selector__input");
+        inp.value = "";
+        inp.focus();
         //no workie: ReactDOM.findDOMNode(this.refs.selector_input).focus();
       }, 0);
 

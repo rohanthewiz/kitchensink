@@ -1,7 +1,7 @@
 import React from 'react';
 import Selector from './selector/selector.jsx';
 
-const QueryLimit = 6; // This must correspond to the limit set on the backend
+const QueryLimit = 8; // This must correspond to the limit set on the backend query
 
 class App extends React.Component {
   constructor(args) {
@@ -26,8 +26,9 @@ class App extends React.Component {
 
     return (
       <div id="app">
-        <h2>A Simple and easily customized selector for React</h2>
-        <strong>(data is supplied from SQLite on the backend)</strong><br/>
+        <strong>A Simple and easily customized selector for React</strong><br/>
+        <span>(data is supplied from SQLite on the backend)</span><br/>
+        <span>Click the button below to change the selection.</span>
         <Selector
           loadOptions={doFetch}
           minimumInput={1}
