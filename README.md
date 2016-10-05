@@ -31,4 +31,4 @@ See https://github.com/valyala/quicktemplate#quick-start
 
 ### Starting the server
 - `./kitchensink`
-- Point your browser to the address and port listed - typically `localhost:8080`
+- Point your browser to the address and port listed - typically `localhost:8094`
