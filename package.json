@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run compile-js; npm run compile-css",
-    "compile-js": "browserify src/index.jsx -t babelify -o dist/js/bundle.js",
+    "compile-js": "browserify src/index.jsx -t babelify | uglifyjs -c > dist/js/bundle.js",
     "compile-css": "stylus src/styl/master.styl -o dist/css/app.css",
     "watch": "onchange 'src/**/*' -- npm run build"
   },
@@ -31,6 +31,8 @@
     "babelify": "^7.3.0",
     "http-server": "^0.9.0",
     "onchange": "^3.0.2",
-    "stylus": "^0.54.5"
+    "stylus": "^0.54.5",
+    "uglify-js": "^2.7.3",
+    "uglifyify": "^3.0.3"
   }
 }
