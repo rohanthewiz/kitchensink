@@ -212,7 +212,7 @@ func (p *BasePage) Body() string {
 //line basepage.qtpl:33
 func (p *BasePage) StreamFooter(qw422016 *qt422016.Writer) {
 //line basepage.qtpl:33
-qw422016.N().S(`&copy; 2016 - Acme Co.`) }
+qw422016.N().S(`&copy; 2017 - Acme Co.`) }
 
 //line basepage.qtpl:33
 //line basepage.qtpl:33

@@ -2,9 +2,9 @@ package main
 
 import (
 	"log"
-	"github.com/valyala/fasthttp"
-	"github.com/rohanthewiz/kitchensink/hash_router"
+	"github.com/rohanthewiz/kitchensink/handlers"
 	"github.com/rohanthewiz/kitchensink/models/product"
+	"github.com/kataras/iris"
 )
 
 func main() {
@@ -12,8 +12,9 @@ func main() {
 	defer product.CloseDB()
 
 	log.Println("Starting the server at http://0.0.0.0:8094...")
-	err := fasthttp.ListenAndServe("0.0.0.0:8094", hash_router.Route)
-	if err != nil {
-		log.Fatal("unexpected error in server:", err)
-	}
+	iris.Get("/", handlers.MainPageHandler)
+	iris.Get("/products", handlers.ProductsHandler)
+	iris.Get("/seed", handlers.ProductsSeedHandler)
+	iris.StaticServe("./dist", "/dist")
+	iris.Listen(":8094")
 }

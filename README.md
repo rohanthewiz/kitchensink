@@ -5,8 +5,9 @@ This is a work in-progress, but demonstrable here: http://gonotes.net:8094
 
 On the backend
 - Go (golang)
-- Valyala Fasthttp - https://github.com/valyala/fasthttp
-- Valyala QuickTemplate - https://github.com/valyala/quicktemplate
+- Iris - the fastest web framework for Go, period. https://github.com/kataras/iris
+- The base router of Iris is Valyala's Fasthttp - https://github.com/valyala/fasthttp
+- Valyala's QuickTemplate - https://github.com/valyala/quicktemplate
 
 On the frontend
 - React
